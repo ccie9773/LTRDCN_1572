@@ -1,14 +1,7 @@
-site_name: LTRDCN-1572
-site_description: Documentation for LTRDCN-1572
-repo_name: GitHub
+site_name: CL
 repo_url: https://github.com/fchaudhr/LTRDCN_1572
-site_author: AS
-theme:
-    name: 'mkdocs'
-#theme: readthedocs
-pages: 
+remote_branch: gh-pages
+remote_name: origin
+pages:
     - Home: index.md
-    - About: about.md
-#    - Chapter 1:
-        
-
+theme: readthedocs
