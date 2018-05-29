@@ -4,7 +4,7 @@ repo_name: GitHub
 repo_url: https://github.com/fchaudhr/LTRDCN_1572
 site_author: AS
 theme:
-    name: mkdocs
+    name: 'mkdocs'
 #theme: readthedocs
 pages: 
     - Home: index.md
