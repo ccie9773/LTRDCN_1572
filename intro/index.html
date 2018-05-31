@@ -63,6 +63,17 @@
     <li class="toctree-l2"><a href="#ansible">Ansible:</a></li>
     
 
+    <li class="toctree-l2"><a href="#about-this-lab">About this lab</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#lab-flow">Lab Flow:</a></li>
+        
+            <li><a class="toctree-l3" href="#lab-access">Lab Access:</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -134,6 +145,88 @@ This could be physical HW (Nexus9k) or Virtual (Nexus 1000v, Nexus 9000v)</li>
 <li><strong>Roles</strong>: group of tasks, templates to implement specific behavior</li>
 <li><strong>Jinja2</strong>: a Python based tempting language</li>
 </ul>
+<p><img alt="" src="../pic/Picture1.png" /></p>
+<h2 id="about-this-lab">About this lab</h2>
+<p>As a standardized overlay technology, multiple vendors have adopted VXLAN as datacenter solution to provide scalability and allow layer 2 across IP network. MP-BPG EVPN as VXLAN control plane protocol provides a robust scalable solution to overcome the limitation in VXLAN flood and learn mode.</p>
+<p>As an open source automation tool, Ansible provides the same framework for network administrators to automate network infrastructure as the rest IT organization. </p>
+<p>This lab demostates the possibility of using Ansible to automate datacenter VXLAN fabric day 1 provisiong and day 2 operations. </p>
+<h3 id="lab-flow">Lab Flow:</h3>
+<ol>
+<li>Ansible installation </li>
+<li>Ansible playbook </li>
+<li>Day 1 automation using Ansible </li>
+<li>Day 2 automation using Ansible </li>
+<li>Day 0 automation </li>
+<li>L4-L7 Service insertion</li>
+</ol>
+<h3 id="lab-access">Lab Access:</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Spine-1</th>
+<th align="center">198.18.133.33:1030</th>
+<th align="center">admin/C1sco12345</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Spine-2</td>
+<td align="center">198.18.133.33:1040</td>
+<td align="center">admin/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Leaf-1</td>
+<td align="center">198.18.133.33:1050</td>
+<td align="center">admin/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Leaf-3</td>
+<td align="center">198.18.133.33:1070</td>
+<td align="center">admin/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Leaf-4</td>
+<td align="center">198.18.1333.33:1080</td>
+<td align="center">admin/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Server-1</td>
+<td align="center">198.18.134.50</td>
+<td align="center">root/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Server-3</td>
+<td align="center">198.18.134.52</td>
+<td align="center">root/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Server-4</td>
+<td align="center">198.18.134.53</td>
+<td align="center">root/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">Ansible Server</td>
+<td align="center">198.18.134.150</td>
+<td align="center">root/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">DCNM</td>
+<td align="center">198.18.134.200</td>
+<td align="center">admin/C1sco12345</td>
+</tr>
+<tr>
+<td align="center">F5</td>
+<td align="center">198.18.4.10</td>
+<td align="center">root/default</td>
+</tr>
+<tr>
+<td align="center">Remote Workstation</td>
+<td align="center">198.18.133.36</td>
+<td align="center">demouser/C1sco12345</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../pic/2-topology.png" /></p>
               
             </div>
           </div>
