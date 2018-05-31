@@ -89,6 +89,9 @@
     <li class="toctree-l2"><a href="#step-9-create-ansible-inventory">Step 9: Create Ansible Inventory</a></li>
     
 
+    <li class="toctree-l2"><a href="#step-10-ansible-role-structure">Step 10: Ansible role structure</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -203,7 +206,7 @@ Finished processing dependencies for pip
 <p>Below screenshot shows the execution of above command:</p>
 <p><img alt="" src="../pic/1-6-5-python.png" /></p>
 <h4 id="step-8-verify-ansible">Step 8: Verify Ansible</h4>
-<p>After installation is complete, check Ansible version by executing the below command:</p>
+<p>After installation is complete, check Ansible version by executing command <code>ansible --version</code>, as shown below:</p>
 <pre><code>[root@rhel7-tools ~]# ansible --version 
 ansible 2.5.0
   config file = None
@@ -256,7 +259,7 @@ gather_fact=no
 </code></pre>
 </li>
 <li>
-<p>• Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code>  </p>
+<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code>  </p>
 <p>Below screenshot shows the execution of above command:
 <img alt="" src="../pic/1-9-2-inv.png" /></p>
 </li>
@@ -266,7 +269,7 @@ gather_fact=no
 </code></pre>
 </li>
 <li>
-<p>At the bottom of the ansible.cfg file, insert the following lines (by typing <code>i</code>):</p>
+<p>At the bottom of the ansible.cfg file, insert the below lines (by typing <code>i</code>):</p>
 <pre><code>[defaults]
 inventory = hosts
 host_key_checking = false
@@ -300,7 +303,7 @@ stdout_callback = debug
 </code></pre>
 </li>
 <li>
-<p>Quit and save <code>vi</code> editor by press <code>Esc</code> key and then type <code>:wq!</code>    </p>
+<p>Quit and save <code>vi</code> editor by pressing <code>Esc</code> key and then type <code>:wq!</code>     </p>
 </li>
 <li>
 <p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
@@ -333,8 +336,22 @@ stdout_callback = debug
 <p>Quit and save <code>vi</code> editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
 </li>
 </ul>
-<p>xxxx</p>
-<p>d</p>
+<h4 id="step-10-ansible-role-structure">Step 10: Ansible role structure</h4>
+<p>Role is very useful technique to manage a set of playbooks in Ansible. 
+In this lab, we will use two different playbooks to manage configuration for Spine and Leaf switches. </p>
+<p>We will use role structure and manage the two plays into single playbook. 
+A role directory structure contains several directories of defaults, vars, files, handlers, meta, tasks and templates. </p>
+<p>In this lab:</p>
+<ul>
+<li>we will use vars, templates and tasks folders <code>/vars</code> </li>
+<li>main.yml file in vars folder contains dictionary of variables for this role <code>/tasks</code></li>
+<li>main.yml file in tasks folder contains the Ansible playbook for this role</li>
+</ul>
+<p>To proceed further in the new:</p>
+<p>•   Create roles directory in folder LTRDCN-1572 by issuing below commands:</p>
+<pre><code>[root@rhel7-tools LTRDCN-1572]# mkdir roles
+</code></pre>
+<p>This will be used in the lab later.</p>
               
             </div>
           </div>
