@@ -57,15 +57,10 @@
     <a class="current" href="./">Introduction</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#introduction">Introduction</a></li>
+    <li class="toctree-l2"><a href="#vxlan">VXLAN:</a></li>
     
-        <ul>
-        
-            <li><a class="toctree-l3" href="#vxlan">VXLAN:</a></li>
-        
-            <li><a class="toctree-l3" href="#ansible">Ansible:</a></li>
-        
-        </ul>
+
+    <li class="toctree-l2"><a href="#ansible">Ansible:</a></li>
     
 
     </ul>
@@ -106,8 +101,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="introduction">Introduction</h1>
-<h2 id="vxlan">VXLAN:</h2>
+                <h2 id="vxlan">VXLAN:</h2>
 <p>VXLAN stands for Virtual Extensible Local Area Network. VXLAN is a L2 overlay scheme on top of L3 network or we can say it is a L2 in layer 3 tunnel. It runs over the existing networks and provides the means to stretch the L2 network. Only VMs within the same VXLAN segment can communicate with each other. Each VXLAN segment is identified by a 24 bit segment ID called “VXLAN Network Identifier (VNI)”.  This help overcome 4094 VLAN scale limitation and able to extend it to 224 segments.</p>
 <p>VXLAN uses BGP as its control plane for Overlay. It makes it forwarding decisions at VTEPs (Virtual tunnel end points) for layer-2 and layer-3. Forwarding happens based on MAC or IP learnt via control plane (MP-BGP EVPN) . VXLAN uses IGP, PIM and BGP as its underlay in the fabric. </p>
 <p>Below are some of the terminologies that will be used in the lab:</p>
