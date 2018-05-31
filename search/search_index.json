@@ -2,23 +2,18 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to CL LTRDCN-1572\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.",
+            "text": "LTRDCN-1572: VXLAN EVPN Fabric and automation using Ansible\n\n\nFor full documentation visit \nCisco Live\n.\n\n\nSpeakers:\n\n\n\n\nFaisal Chaudhry \nPrincipal Architect, Cisco Advanced Services\n\n\nLei Tian \nSolutions Architect, Cisco Advanced Services",
             "title": "Home"
         },
         {
-            "location": "/#welcome-to-cl-ltrdcn-1572",
-            "text": "For full documentation visit  mkdocs.org .",
-            "title": "Welcome to CL LTRDCN-1572"
+            "location": "/#ltrdcn-1572-vxlan-evpn-fabric-and-automation-using-ansible",
+            "text": "For full documentation visit  Cisco Live .",
+            "title": "LTRDCN-1572: VXLAN EVPN Fabric and automation using Ansible"
         },
         {
-            "location": "/#commands",
-            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.",
-            "title": "Commands"
-        },
-        {
-            "location": "/#project-layout",
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.",
-            "title": "Project layout"
+            "location": "/#speakers",
+            "text": "Faisal Chaudhry  Principal Architect, Cisco Advanced Services  Lei Tian  Solutions Architect, Cisco Advanced Services",
+            "title": "Speakers:"
         }
     ]
 }
