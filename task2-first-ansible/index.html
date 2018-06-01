@@ -191,22 +191,21 @@
 <hr />
 <h3 id="step-4-vlan-tasks-in-playbook">Step 4: VLAN tasks in playbook</h3>
 <ul>
-<li>
-<p>Continue to add below tasks on the playbook:</p>
-<pre><code>tasks:
-  - name: provision VLAN
-    nxos_config:
-      lines: "vlan {{item}}"
-      provider: "{{nxos_provider}}"
-    with_items:
-      -  140
-      -  141
-    tags: add vlans
+<li>Continue to add below tasks on the playbook:</li>
+</ul>
+<pre><code class="YAML">    tasks:
+      - name: provision VLAN
+        nxos_config:
+          lines: &quot;vlan {{item}}&quot;
+          provider: &quot;{{nxos_provider}}&quot;
+        with_items:
+          -  140
+          -  141
+        tags: add vlans
 </code></pre>
-</li>
-<li>
-<p>Multiple plays can be defined in one playbook under“tasks”, each starts with “-“ . </p>
-</li>
+
+<ul>
+<li>Multiple plays can be defined in one playbook under“tasks”, each starts with “-“ . </li>
 <li>This kind of play creates multiple VLANs using nxos_config module. <ul>
 <li>The “lines” option is used to pass only one configuration command.  This commands must be the exact same commands as found in the device running-config.</li>
 <li>Though one or multiple configuration commands can be configured under the “lines” option.   For multiple, ordered set of commands can be configured under this “line” section.</li>
@@ -257,28 +256,29 @@
 <p>Now, we have tested our first playbook with basic configuration ( adding 2 VLANS), we are now going to add more tasks in our existing playbook “vlan_provision.yml”</p>
 <ul>
 <li>we will add new plays in the playbook to assign VLANs to server facing port. This time, we will configure VLAN towards the server facing ports</li>
-<li>Go back to ATOM and add the following plays to the existing playbook<pre><code>  - name: configure server facing port to L2
-    nxos_interface:
-      interface: eth1/3
-      mode: layer2
-      provider: "{{nxos_provider}}"
-  - name: configure VLAN for server port
-    when: ("101" in inventory_hostname) or ("103" in inventory_hostname)
-    nxos_switchport:
-      interface: eth1/3
-      mode: access
-      access_vlan: 140
-      provider: "{{nxos_provider}}"
-  - name: configure VLAN for server port
-    when: ("102" in inventory_hostname) or ("104" in inventory_hostname)
-    nxos_switchport:
-      interface: eth1/3
-      mode: access
-      access_vlan: 141
-      provider: "{{nxos_provider}}"
-</code></pre>
-</li>
+<li>Go back to ATOM and add the following plays to the existing playbook</li>
 </ul>
+<pre><code class="YAML">      - name: configure server facing port to L2
+        nxos_interface:
+          interface: eth1/3
+          mode: layer2
+          provider: &quot;{{nxos_provider}}&quot;
+      - name: configure VLAN for server port
+        when: (&quot;101&quot; in inventory_hostname) or (&quot;103&quot; in inventory_hostname)
+        nxos_switchport:
+          interface: eth1/3
+          mode: access
+          access_vlan: 140
+          provider: &quot;{{nxos_provider}}&quot;
+      - name: configure VLAN for server port
+        when: (&quot;102&quot; in inventory_hostname) or (&quot;104&quot; in inventory_hostname)
+        nxos_switchport:
+          interface: eth1/3
+          mode: access
+          access_vlan: 141
+          provider: &quot;{{nxos_provider}}&quot;
+</code></pre>
+
 <p>In this new play, we used nxos module “<strong>nxos_interface</strong>” and “<strong>nxos_switchport</strong>”. </p>
 <ul>
 <li>“nxos_interface” provides the capability to manage the physical attributes of an interface<ul>
