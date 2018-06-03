@@ -136,7 +136,7 @@
 <p><img alt="" src="../pic/2-1-atom.png" /></p>
 </li>
 <li>
-<p>After opening ATOM, <strong>Click</strong> “No Never” to the “Register as default atom:// URI handlre” message as show below:</p>
+<p>After opening ATOM, <strong>Click</strong> <code>No, Never</code> to the “Register as default atom:// URI handlre” message as show below:</p>
 <p><img alt="" src="../pic/2-1-2-atom.png" /></p>
 </li>
 </ul>
@@ -153,7 +153,7 @@
 <p><img alt="" src="../pic/2-2-2-atom-vlan.png" /></p>
 </li>
 <li>
-<p>Also, on the lower bar of the ATOM, <strong>choose</strong> the file grammar of <strong>YAML</strong> instead of default "<strong>Plain Text</strong>"</p>
+<p>Also, on the lower bar of the ATOM, verify that  file grammar of <strong>YAML</strong> is selected instead of default "<strong>Plain Text</strong>".  If <strong>YAML</strong> is not selected, then you should <strong>choose</strong> it from the listed options.</p>
 </li>
 </ul>
 <hr />
@@ -176,9 +176,10 @@
         host: &quot;{{ inventory_hostname }}&quot;
 </code></pre>
 
+<p>Note:</p>
 <ul>
-<li>“<strong>hosts</strong>” defines the scope of this playbook applies to all switches in group ‘leaf’ and ‘jinja2_leaf’. <ul>
-<li><strong>Note</strong> you can review the IP addresses of the three (2) “leaf” and one (1) “jinja2_leaf” in the “<strong>hosts</strong>” file (configured in previous steps).  The IP addresses are:<ul>
+<li>“<strong>hosts:</strong>” defines the scope of this playbook applies to all switches in group ‘leaf’ and ‘jinja2_leaf’ (within the <strong><em>"hosts"</em></strong> file created in pervious task). <ul>
+<li><strong>Note</strong> that you can review the IP addresses of the three (2) “leaf” and one (1) “jinja2_leaf” in the “<strong><em>hosts</em></strong>” file (configured in previous steps).  The IP addresses are:<ul>
 <li>jinja2_leaf: 198.18.4.104</li>
 <li>leaf: 198.18.4.101</li>
 <li>leaf: 198.18.4.103</li>
@@ -188,7 +189,7 @@
 </li>
 <li>“<strong>vars</strong>” defines one variable “<strong>nxos_provider</strong>” that will be used in this playbook. </li>
 <li>“<strong>nxos_provider</strong>” is variable that includes all value that will be used for connection and autnentication. <ul>
-<li>This variable will be referenced in playbook via “<strong>provider</strong>” argument.     </li>
+<li>This variable will be referenced in playbook via “<strong>provider</strong>” argument (that will be added in next step #4).    </li>
 </ul>
 </li>
 </ul>
@@ -208,6 +209,7 @@
         tags: add vlans
 </code></pre>
 
+<p>Note:</p>
 <ul>
 <li>Multiple plays can be defined in one playbook under “<strong>tasks</strong>”, each starts with “-“ . </li>
 <li>
@@ -218,13 +220,16 @@
 </ul>
 </li>
 <li>
-<p>At the end of this play, we use “<strong>tags</strong>” to name the play “<strong>add vlans</strong>”. This is useful to run a specific part of the configuration without running whole playbook. </p>
+<p>At the end of this play, we use “<strong>tags</strong>” to name the play “<strong>add vlans</strong>”. This is useful to run a specific part of the configuration without running whole playbook.</p>
+</li>
+<li>
+<p>Below screenshot shows how playbook will look:</p>
 <p><img alt="" src="../pic/2-4-1.png" /></p>
 <p><strong>NOTE: Formatting is extremely important when working with Ansible. Ansible playbook would return errors if the spaces are not properly aligned or formatting is not correct
 </strong></p>
 </li>
 <li>
-<p>Click “<strong>File</strong>” and “<strong>Save</strong>” . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </p>
+<p><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </p>
 <p><img alt="" src="../pic/2-4-2.png" /></p>
 <p><strong>NOTE: Once the Save button is pressed, then at the lower part of ATOM app, you will see message about connecting to Ansibe host (198.18.134.150) and saving the vlan_provision.yml file</strong></p>
 </li>
