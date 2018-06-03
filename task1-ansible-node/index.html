@@ -311,7 +311,43 @@ stdout_callback = debug
 
 <ul>
 <li>
-<p>Quit and save <code>vi</code> editor by pressing <code>Esc</code> key and then type <code>:wq!</code>     </p>
+<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
+</li>
+<li>
+<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
+<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.103.yml
+</code></pre>
+<p>In the file: add below data:</p>
+</li>
+</ul>
+<pre><code class="YAML">---
+  hostname: leaf_3
+  loopback0: 192.168.0.10
+  loopback1: 192.168.0.110
+  router_id: 192.168.0.10
+</code></pre>
+
+<ul>
+<li>
+<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
+</li>
+<li>
+<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
+<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.104.yml
+</code></pre>
+<p>In the file: add below data:</p>
+</li>
+</ul>
+<pre><code class="YAML">---
+  hostname: leaf_4
+  loopback0: 192.168.0.11
+  loopback1: 192.168.0.111
+  router_id: 192.168.0.11
+</code></pre>
+
+<ul>
+<li>
+<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
 </li>
 <li>
 <p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
