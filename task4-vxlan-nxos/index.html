@@ -83,21 +83,19 @@
     <li class="toctree-l2"><a href="#step-2-create-new-roles-and-vars">Step 2: Create new roles and vars</a></li>
     
 
-    <li class="toctree-l2"><a href="#step-3-configure-bgp-using-nxos-modules">Step 3: Configure BGP using NXOS modules</a></li>
+    <li class="toctree-l2"><a href="#step-3-build-playbook-for-spine-role-tasks">Step 3: Build playbook for Spine role - tasks:</a></li>
     
-        <ul>
-        
-            <li><a class="toctree-l3" href="#build-playbook-for-spine-role-tasks">Build playbook for Spine role - tasks:</a></li>
-        
-            <li><a class="toctree-l3" href="#build-playbook-for-spine-role-vars">Build playbook for Spine role - vars:</a></li>
-        
-            <li><a class="toctree-l3" href="#build-playbook-for-leaf-role-tasks">Build playbook for leaf role - tasks:</a></li>
-        
-            <li><a class="toctree-l3" href="#build-playbook-for-leaf-role-vars">Build playbook for leaf role - vars:</a></li>
-        
-            <li><a class="toctree-l3" href="#run-the-playbook-and-verify-configuration-changes">Run the playbook and verify configuration changes</a></li>
-        
-        </ul>
+
+    <li class="toctree-l2"><a href="#step-4-build-playbook-for-spine-role-vars">Step 4:  Build playbook for Spine role - vars</a></li>
+    
+
+    <li class="toctree-l2"><a href="#step-5-build-playbook-for-leaf-role-tasks">Step 5:  Build playbook for leaf role - tasks:</a></li>
+    
+
+    <li class="toctree-l2"><a href="#step-6-build-playbook-for-leaf-role-vars">Step 6: Build playbook for leaf role - vars</a></li>
+    
+
+    <li class="toctree-l2"><a href="#step-7-execute-playbook">Step 7: Execute playbook</a></li>
     
 
     </ul>
@@ -138,8 +136,34 @@
           <div role="main">
             <div class="section">
               
-                <p>In this section, you will build remaining VXLAN fabric using Ansible NXOS modules.</p>
-<p>Compare of using Jinja2 to build the fabric, NXOS modules are more abstract from configurations. There is no knowledge of NXOS CLI required to use NXOS modules. You will follow the steps to configure BGP, Multicast, VXLAN and EVPN. In each step, you will use different Ansible NXOS modules to accomplish the step. </p>
+                <p>In this section, you will build remaining VXLAN fabric using Ansible NXOS modules.  We will configure BGP neighbors between spine and leaf switching by using Ansible NXOS modules. The following NXOS ansible modules are used:</p>
+<table>
+<thead>
+<tr>
+<th align="center">nxos_feature</th>
+<th align="center">Manage features on Nexus switches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">nxos_bgp</td>
+<td align="center">Manage BGP config</td>
+</tr>
+<tr>
+<td align="center">nxos_bgp_neighbor</td>
+<td align="center">Manage BGP neighbor config</td>
+</tr>
+<tr>
+<td align="center">Nxos_bgp_af</td>
+<td align="center">Manage BGP address-famility config</td>
+</tr>
+<tr>
+<td align="center">Nxos_bgp_neighbor_af</td>
+<td align="center">Manage BGP neighbor address-famility config</td>
+</tr>
+</tbody>
+</table>
+<p>In comparison to Jinja2, NXOS modules are more abstract from configurations. There is no need to have knowledge of NXOS CLI to use NXOS modules. You will follow the steps to configure BGP, Multicast, VXLAN and EVPN. In each step, you will use different Ansible NXOS modules to accomplish the step. </p>
 <p><img alt="" src="../pic/4-0-1.png" /></p>
 <p>After each step, you can login the switches to verify configuration changes. </p>
 <hr />
@@ -174,35 +198,7 @@
 </li>
 </ul>
 <hr />
-<h3 id="step-3-configure-bgp-using-nxos-modules">Step 3: Configure BGP using NXOS modules</h3>
-<p>In this section we will configure BGP neighbors between spine and leaf switching by using Ansible NXOS modules. The following NXOS ansible modules are used:</p>
-<table>
-<thead>
-<tr>
-<th align="center">nxos_feature</th>
-<th align="center">Manage features on Nexus switches</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">nxos_bgp</td>
-<td align="center">Manage BGP config</td>
-</tr>
-<tr>
-<td align="center">nxos_bgp_neighbor</td>
-<td align="center">Manage BGP neighbor config</td>
-</tr>
-<tr>
-<td align="center">Nxos_bgp_af</td>
-<td align="center">Manage BGP address-famility config</td>
-</tr>
-<tr>
-<td align="center">Nxos_bgp_neighbor_af</td>
-<td align="center">Manage BGP neighbor address-famility config</td>
-</tr>
-</tbody>
-</table>
-<h4 id="build-playbook-for-spine-role-tasks">Build playbook for Spine role - tasks:</h4>
+<h3 id="step-3-build-playbook-for-spine-role-tasks">Step 3: Build playbook for Spine role - tasks:</h3>
 <p>“<strong>ansible-galaxy</strong>” automatically creates empty “<strong>main.yml</strong>” file under “<strong>tasks</strong>” folder.  We are going to use “<strong>Atom</strong>” to edit the <strong>main.yml</strong> file. </p>
 <ul>
 <li>On ATOM, open up the project folder <code>LTRDCN-1572</code> and edit <code>main.yml</code> file under <code>roles/spine/tasks/</code> to include following: </li>
@@ -270,7 +266,8 @@
 <p>“<strong>nxos_bgp_neighbor_af</strong>” module provides the capability to manage BGP Address-family Neighbour configuration in NX-OS.  </p>
 </li>
 </ul>
-<h4 id="build-playbook-for-spine-role-vars">Build playbook for Spine role - vars:</h4>
+<hr />
+<h3 id="step-4-build-playbook-for-spine-role-vars">Step 4:  Build playbook for Spine role - vars</h3>
 <p>“<strong>ansible-galaxy</strong>” automatically creates empty “<strong>main.yml</strong>” file under “<strong>vars</strong>” folder. We can use “<strong>Atom</strong>” to edit the main.yml file</p>
 <ul>
 <li>Switch to <strong>ATOM</strong>, then open up the project folder <code>LTRDCN-1572</code> from the left pane and <strong>open</strong> <code>main.yml</code> file under “<strong>roles/spine/vars/</strong>” and enter below content:</li>
@@ -295,7 +292,8 @@
 <ul>
 <li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
 </ul>
-<h4 id="build-playbook-for-leaf-role-tasks">Build playbook for leaf role - tasks:</h4>
+<hr />
+<h3 id="step-5-build-playbook-for-leaf-role-tasks">Step 5:  Build playbook for leaf role - tasks:</h3>
 <p>“<strong>ansible-galaxy</strong>” automatically creates empty “<strong>main.yml</strong>” file under “<strong>tasks</strong>” folder. We can use “<strong>Atom</strong>” to edit the main.yml file</p>
 <ul>
 <li>On ATOM, open up the project folder <code>LTRDCN-1572</code> and edit <code>main.yml</code> file under <code>roles/leaf/tasks/</code> to include following: </li>
@@ -347,7 +345,8 @@
 <ul>
 <li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
 </ul>
-<h4 id="build-playbook-for-leaf-role-vars">Build playbook for leaf role - vars:</h4>
+<hr />
+<h3 id="step-6-build-playbook-for-leaf-role-vars">Step 6: Build playbook for leaf role - vars</h3>
 <p>“<strong>ansible-galaxy</strong>” automatically creates empty “<strong>main.yml</strong>” file under “<strong>vars</strong>” folder. We can use “<strong>Atom</strong>” to edit the main.yml file</p>
 <ul>
 <li>Switch to <strong>ATOM</strong>, then open up the project folder <code>LTRDCN-1572</code> from the left pane and <strong>open</strong> <code>main.yml</code> file under “<strong>roles/leaf/vars/</strong>” and enter below content:</li>
@@ -372,7 +371,8 @@
 <ul>
 <li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
 </ul>
-<h4 id="run-the-playbook-and-verify-configuration-changes">Run the playbook and verify configuration changes</h4>
+<hr />
+<h3 id="step-7-execute-playbook">Step 7: Execute playbook</h3>
 <ul>
 <li>
 <p>On the Ansible node (in MTputty SSH session), run the command (<code>ansible-playbook nxos_fabric.yml --tags "bgp"</code>) to execute the playbook as shown below:</p>
