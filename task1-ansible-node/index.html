@@ -89,7 +89,19 @@
     <li class="toctree-l2"><a href="#step-9-create-ansible-inventory">Step 9: Create Ansible Inventory</a></li>
     
 
-    <li class="toctree-l2"><a href="#step-10-ansible-role-structure">Step 10: Ansible role structure</a></li>
+    <li class="toctree-l2"><a href="#yaml">~~~ YAML</a></li>
+    
+
+    <li class="toctree-l2"><a href="#yaml_1">~~~ YAML</a></li>
+    
+
+    <li class="toctree-l2"><a href="#yaml_2">~~~ YAML</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#step-10-ansible-role-structure">Step 10: Ansible role structure</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -137,7 +149,7 @@
               
                 <p>Your first task will be to build an Ansible node on a server running redhat CentOS operating system.  At the end of this task, you will have a fully operational Ansible node.</p>
 <h4 id="step-1-connect-to-lab-using-anyconnect-vpn">Step 1: Connect to lab using anyconnect VPN</h4>
-<p>You will connect to <strong>dcloud-lon-anyconnect.cisco.com</strong> using Cisco VPN AnyConnect client, as shown in below picture, with the username and password provided by the lab admin.<br />
+<p>You will connect to <strong>dcloud-sjc-anyconnect.cisco.com</strong> using Cisco VPN AnyConnect client, as shown in below picture, with the username and password provided by the lab admin.<br />
 <strong>Note:</strong> lab admin will furnish the credentials information to the participant.  If you don't have this information please ask the lab speakers.</p>
 <p><img alt="" src="../pic/3-vpn.png" /></p>
 <h4 id="step-2-enter-vpn-credentials">Step 2: Enter VPN credentials</h4>
@@ -239,7 +251,7 @@ ansible 2.5.0
 </code></pre>
 </li>
 <li>
-<p>At the bottom of the inventory file, insert (type i) the following lines:</p>
+<p>At the bottom of the inventory file, insert (type <code>i</code>) the following lines:</p>
 <pre><code>#define global variables, groups and host variables
 [all:vars]
 ansible_connection = local
@@ -283,7 +295,7 @@ stdout_callback = debug
 </code></pre>
 </li>
 <li>
-<p>Quit and save <code>vi</code> editor by press <code>Esc</code> key and then type <code>:wq!</code>    </p>
+<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code>  </p>
 </li>
 <li>
 <p>Do <code>ls</code> to verify the file that you just created under project folder LTRDCN-1572.   </p>
@@ -300,12 +312,12 @@ stdout_callback = debug
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.101.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<pre><code>---
-  hostname: leaf_1
+<h2 id="yaml">~~~ YAML</h2>
+<p>hostname: leaf_1
   loopback0: 192.168.0.8
   loopback1: 192.168.0.18
   router_id: 192.168.0.8
-</code></pre>
+~~~</p>
 </li>
 <li>
 <p>Quit and save <code>vi</code> editor by pressing <code>Esc</code> key and then type <code>:wq!</code>     </p>
@@ -315,30 +327,30 @@ stdout_callback = debug
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.201.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<pre><code>---
-  hostname: spine-1
+<h2 id="yaml_1">~~~ YAML</h2>
+<p>hostname: spine-1
   loopback0: 192.168.0.6
   loopback1: 192.168.0.100
   router_id: 192.168.0.6
-</code></pre>
+~~~</p>
 </li>
 <li>
-<p>Quit and save <code>vi</code> editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
+<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
 </li>
 <li>
 <p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.202.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<pre><code>---
-  hostname: spine-2
-  loopback0: 192.168.0.7
+<h2 id="yaml_2">~~~ YAML</h2>
+<p>hostname: spine-2
+  loopback0: 192.168.0.7 
   loopback1: 192.168.0.100
-  router_id: 192.168.0.7
-</code></pre>
+   router_id: 192.168.0.7
+~~~</p>
 </li>
 <li>
-<p>Quit and save <code>vi</code> editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
+<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
 </li>
 </ul>
 <h4 id="step-10-ansible-role-structure">Step 10: Ansible role structure</h4>
