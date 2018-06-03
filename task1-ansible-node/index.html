@@ -89,19 +89,7 @@
     <li class="toctree-l2"><a href="#step-9-create-ansible-inventory">Step 9: Create Ansible Inventory</a></li>
     
 
-    <li class="toctree-l2"><a href="#yaml">~~~ YAML</a></li>
-    
-
-    <li class="toctree-l2"><a href="#yaml_1">~~~ YAML</a></li>
-    
-
-    <li class="toctree-l2"><a href="#yaml_2">~~~ YAML</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#step-10-ansible-role-structure">Step 10: Ansible role structure</a></li>
-        
-        </ul>
+    <li class="toctree-l2"><a href="#step-10-ansible-role-structure">Step 10: Ansible role structure</a></li>
     
 
     </ul>
@@ -312,13 +300,16 @@ stdout_callback = debug
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.101.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<h2 id="yaml">~~~ YAML</h2>
-<p>hostname: leaf_1
+</li>
+</ul>
+<pre><code class="YAML">---
+  hostname: leaf_1
   loopback0: 192.168.0.8
   loopback1: 192.168.0.18
   router_id: 192.168.0.8
-~~~</p>
-</li>
+</code></pre>
+
+<ul>
 <li>
 <p>Quit and save <code>vi</code> editor by pressing <code>Esc</code> key and then type <code>:wq!</code>     </p>
 </li>
@@ -327,13 +318,16 @@ stdout_callback = debug
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.201.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<h2 id="yaml_1">~~~ YAML</h2>
-<p>hostname: spine-1
+</li>
+</ul>
+<pre><code class="YAML">---
+  hostname: spine-1
   loopback0: 192.168.0.6
   loopback1: 192.168.0.100
   router_id: 192.168.0.6
-~~~</p>
-</li>
+</code></pre>
+
+<ul>
 <li>
 <p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
 </li>
@@ -342,16 +336,17 @@ stdout_callback = debug
 <pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.202.yml
 </code></pre>
 <p>In the file: add below data:</p>
-<h2 id="yaml_2">~~~ YAML</h2>
-<p>hostname: spine-2
+</li>
+</ul>
+<pre><code class="YAML">---
+  hostname: spine-2
   loopback0: 192.168.0.7 
   loopback1: 192.168.0.100
    router_id: 192.168.0.7
-~~~</p>
-</li>
-<li>
-<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
-</li>
+</code></pre>
+
+<ul>
+<li>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </li>
 </ul>
 <h4 id="step-10-ansible-role-structure">Step 10: Ansible role structure</h4>
 <p>Role is very useful technique to manage a set of playbooks in Ansible. 
