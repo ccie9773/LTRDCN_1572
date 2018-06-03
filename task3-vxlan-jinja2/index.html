@@ -75,7 +75,7 @@
     <li class="toctree-l2"><a href="#step-1-install-jinja2">Step 1: Install jinja2</a></li>
     
 
-    <li class="toctree-l2"><a href="#step-2-playbook-for-jinja2-template">Step 2: Playbook for jinja2 template</a></li>
+    <li class="toctree-l2"><a href="#step-2-playbook-for-jinja2-spine">Step 2: Playbook for jinja2 Spine</a></li>
     
 
     <li class="toctree-l2"><a href="#step-3-create-new-roles-and-vars">Step 3: Create new roles and vars</a></li>
@@ -93,7 +93,7 @@
     <li class="toctree-l2"><a href="#step-7-run-jinja2_fabric-playbook">Step 7: Run Jinja2_fabric playbook</a></li>
     
 
-    <li class="toctree-l2"><a href="#step-8-edit-existing-playbook">Step 8: Edit existing playbook</a></li>
+    <li class="toctree-l2"><a href="#step-8-modify-playbook-for-leaf">Step 8: Modify playbook for Leaf</a></li>
     
 
     <li class="toctree-l2"><a href="#step-9-variable-file-for-jinja2_leaf-role">Step 9: Variable file for jinja2_leaf role</a></li>
@@ -162,7 +162,7 @@ Requirement already satisfied (use --upgrade to upgrade): MarkupSafe in /usr/lib
 </li>
 </ul>
 <hr />
-<h3 id="step-2-playbook-for-jinja2-template">Step 2: Playbook for jinja2 template</h3>
+<h3 id="step-2-playbook-for-jinja2-spine">Step 2: Playbook for jinja2 Spine</h3>
 <p>In this section, we will use Jina2 template and Ansible to provision the VXLAN Fabric. </p>
 <ul>
 <li>
@@ -207,7 +207,7 @@ Requirement already satisfied (use --upgrade to upgrade): MarkupSafe in /usr/lib
 <ul>
 <li>
 <p>On the MTputty, go back to Ansible Server node (198.18.134.150), switch to ‘<strong>roles</strong>’ directory; <strong>create</strong> ‘jinja2_spine’ and ‘jinja2_leaf’ roles using ansible-galaxy using below commands: </p>
-<pre><code>[root@rhel7-tools ~]# cd LTRDCN-1572/
+<pre><code>[root@rhel7-tools ~]# ~/cd LTRDCN-1572/
 [root@rhel7-tools LTRDCN-1572]# cd roles/
 [root@rhel7-tools roles]# ansible-galaxy init jinja2_spine&amp;&amp;ansible-galaxy init jinja2_leaf
 </code></pre>
@@ -392,7 +392,7 @@ Requirement already satisfied (use --upgrade to upgrade): MarkupSafe in /usr/lib
 </li>
 </ul>
 <hr />
-<h3 id="step-8-edit-existing-playbook">Step 8: Edit existing playbook</h3>
+<h3 id="step-8-modify-playbook-for-leaf">Step 8: Modify playbook for Leaf</h3>
 <p>In this section, we will use Jina2 template and Ansible to provision the VXLAN Fabric on leaf-4.   We are going to add jinja2_leaf this time to the already created playbook in step 2.</p>
 <ul>
 <li>Switch to “<strong>Atom</strong>”, click on the folder <code>LTRDDCN-1572</code>, edit the existing playbook <code>jinja2_fabric.yml</code> file: <ul>
@@ -528,6 +528,12 @@ Requirement already satisfied (use --upgrade to upgrade): MarkupSafe in /usr/lib
 <hr />
 <h3 id="step-12-run-jinja2_fabric-playbook">Step 12: Run Jinja2_fabric playbook</h3>
 <p>In this section you will run the playbook created in step 8, this will generate configuration file for Spine-2 and Leaf-4 switches. It will also push the configuration file to both switches. </p>
+<ul>
+<li>
+<p>Before running the ansible-playbook, you may <strong>log</strong> into the leaf-4 (in MTputty SSH session) and verify that no bgp configurations exist by running <code>show running bgp</code> command as shown below:</p>
+<p><img alt="" src="../pic/3-12-0.png" /></p>
+</li>
+</ul>
 <p>NOTE: It might take couple of minutes for the configuration to be pushed to via the Ansible Server. It is working in the background. </p>
 <ul>
 <li>
