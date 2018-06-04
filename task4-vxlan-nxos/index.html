@@ -149,7 +149,7 @@
         </ul>
     
 
-    <li class="toctree-l2"><a href="#step-10-run-nxos_fabric-playbook">Step 10: Run nxos_fabric playbook</a></li>
+    <li class="toctree-l2"><a href="#step-11-run-nxos_fabric-playbook">Step 11: Run nxos_fabric playbook</a></li>
     
 
     </ul>
@@ -595,6 +595,7 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <hr />
 <p>Below screenshot shows the output of above command from Spine-1</p>
 <p><img alt="" src="../pic/4-4-3.png" /></p>
+<hr />
 <h3 id="step-9-configure-vxlan-using-ansible">Step 9: Configure VXLAN using Ansible</h3>
 <ul>
 <li>In this section, we will be configuring VXLAN on leaf and spine switches. The NXOS modules we will be using in this section are </li>
@@ -798,6 +799,7 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <strong>Note: login to any leaf switch to verify vxla configuration and vni from ‘show nve vni’ </strong></p>
 <p>Below screenshot is shown from Leaf-4:</p>
 <p><img alt="" src="../pic/4-5-2.png" /> </p>
+<hr />
 <h3 id="step-10-configure-evpn-using-ansible">Step 10: Configure EVPN using Ansible</h3>
 <ul>
 <li>In this section, we will be configuring BGP EVPN on leaf and spine switches. The NXOS modules we will be using in this section are 
@@ -880,15 +882,17 @@ Below screenshot shows the output of above playbook:</p>
 <hr />
 <p>Below screenshot shows the output of above command from leaf-4 switch:</p>
 <p><img alt="" src="../pic/4-6-2.png" /></p>
-<h3 id="step-10-run-nxos_fabric-playbook">Step 10: Run nxos_fabric playbook</h3>
+<hr />
+<h3 id="step-11-run-nxos_fabric-playbook">Step 11: Run nxos_fabric playbook</h3>
 <ul>
 <li>
 <p>Up on this point, you have run the playbook during each step. You could re-run the whole playbook without giving any tags, but no new changes should be maded to the switches. </p>
 <p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook nxos_fabric.yml</code></p>
 </li>
-<li>
-<p><strong>Congratulation!</strong> You have just built VXLAN fabric using ansible + Jinja2 template and ansible + NXOS modules. Let’s verify the VXLAN bridging and VXLAN routing from servers that are pre-configured in following VLANs and IPs </p>
-</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Congratulation!</strong> You have just built VXLAN fabric using ansible + Jinja2 template and ansible + NXOS modules. Let’s verify the VXLAN bridging and VXLAN routing from servers that are pre-configured in following VLANs and IPs </li>
 </ul>
 <table>
 <thead>
