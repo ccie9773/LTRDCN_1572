@@ -169,7 +169,7 @@
 <hr />
 <h3 id="step-2-install-ansible-pre-reqs">Step 2: Install Ansible pre-reqs</h3>
 <ul>
-<li>Switch to <strong>MTPuTTY</strong> install prerequisites packages on <strong>Ansible node</strong> <pre><code>[root@rhel7-tools LTRDCN-1572]# pip install f5-sdk
+<li>Switch to <strong>MTPuTTY</strong> install prerequisites packages on <strong>Ansible node</strong> by using below <code>pip install</code> commands:<pre><code>[root@rhel7-tools LTRDCN-1572]# pip install f5-sdk
 [root@rhel7-tools LTRDCN-1572]# pip install setuptools --upgrade
 [root@rhel7-tools LTRDCN-1572]# pip install bigsuds
 [root@rhel7-tools LTRDCN-1572]# pip install netaddr
@@ -212,7 +212,7 @@ curl: (7) couldn't connect to host`
       username: &quot;{{ user }}&quot;
       password: &quot;{{ pwd }}&quot;
       transport: nxapi
-      host: &quot;198.18.4.104&quot;      
+      host: &quot;198.18.4.104&quot;
   - name: Configure VLANs on the BIG-IP
     bigip_vlan:
      server: &quot;198.18.4.10&quot;
@@ -236,18 +236,18 @@ curl: (7) couldn't connect to host`
      vlan: &quot;External&quot;
      allow_service: &quot;default&quot;
      validate_certs: &quot;no&quot;
-delegate_to: localhost
+    delegate_to: localhost
   - name: Create static route
- bigip_static_route:
-   server: &quot;198.18.4.10&quot;
-   user: &quot;admin&quot;
-   password: &quot;admin&quot;
-   validate_certs: False
-   destination: 0.0.0.0
-   netmask: 0.0.0.0
-   gateway_address: 172.21.140.1
-   name: &quot;defult&quot;
- delegate_to: localhost
+    bigip_static_route:
+      server: &quot;198.18.4.10&quot;
+      user: &quot;admin&quot;
+      password: &quot;admin&quot;
+      validate_certs: False
+      destination: 0.0.0.0
+      netmask: 0.0.0.0
+      gateway_address: 172.21.140.1
+      name: &quot;defult&quot;
+    delegate_to: localhost
   - name: Create nodes
     bigip_node:
       server: &quot;198.18.4.10&quot;
@@ -312,7 +312,7 @@ delegate_to: localhost
 <hr />
 <h3 id="step-5-run-playbook">Step 5: Run playbook</h3>
 <ul>
-<li>Run playbook <strong>f5ltm.yml</strong> to provision VIP (172.21.140.100) on F5 and also put all four servers into the server pool using <code>ansible-playbook f5ltm.yml</code>: </li>
+<li>On the <strong>Ansible node</strong> (using MTputty SSH), run playbook <strong>f5ltm.yml</strong> to provision VIP (172.21.140.100) on F5 and also put all four servers into the server pool using <code>ansible-playbook f5ltm.yml</code>: </li>
 </ul>
 <p><img alt="" src="../pic/a-5-1.png" /> </p>
 <hr />
