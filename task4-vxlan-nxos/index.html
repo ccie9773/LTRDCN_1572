@@ -305,6 +305,9 @@
          tags: bgp
 </code></pre>
 
+<ul>
+<li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
+</ul>
 <p><strong>Note</strong>, in the above task/main.yml file multiple NXOS ansible modules have been used:</p>
 <ul>
 <li>
@@ -450,8 +453,7 @@
 </ul>
 <hr />
 <h3 id="step-8-configure-multicast-using-ansible-nxos">Step 8: Configure Multicast using Ansible NXOS</h3>
-<p>Configure Multicast using Ansible NXOS 
-- In this section, we will be configuring underlay multicast to support BUM traffic in the VXLAN fabric. The NXOS modules we will be using in this section are 
+<p>In this section, we will be configuring underlay multicast to support BUM traffic in the VXLAN fabric. The NXOS modules we will be using in this section are 
 nxos_feature    Manage fatures on Nexus switchs 
 nxos_pim_interface  Manage PIM interface configuration</p>
 <table>
@@ -484,7 +486,9 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <p><font style=background-color:yellow>Note: there is no nxos ansible module for Anycast RP, we will use nxos_config to push the Anycast RP configuration<font></p>
 <hr />
 <h5 id="edit-playbook-for-spine-role">Edit playbook for spine role</h5>
-<p>Use <strong>“Atom”</strong> to edit the <strong>“main.yml”</strong> file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open <strong>“main.yml”</strong> file under <strong>“roles/spine/tasks/”</strong> and save the below tasks at the end the file: </p>
+<ul>
+<li>Use <strong>“Atom”</strong> to edit the <strong>“main.yml”</strong> file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open <strong>“main.yml”</strong> file under <strong>“roles/spine/tasks/”</strong> and save the below tasks at the end the file: </li>
+</ul>
 <hr />
 <p><font style=background-color:yellow>Note: It is recommended to write your playbook and learn from mistakes, but file is also available in the box folder if you prefer to reuse.</font> </p>
 <hr />
@@ -536,8 +540,13 @@ nxos_pim_interface  Manage PIM interface configuration</p>
          tags: multicast
 </code></pre>
 
+<ul>
+<li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
+</ul>
 <h5 id="edit-variable-file-for-spine-role">Edit variable file for Spine role</h5>
-<p>Use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/spine/vars/”</strong></p>
+<ul>
+<li>Use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/spine/vars/”</strong></li>
+</ul>
 <pre><code class="YAML">  L3_interfaces:
   - { interface: Ethernet1/1 }
   - { interface: Ethernet1/2 }
@@ -549,8 +558,13 @@ nxos_pim_interface  Manage PIM interface configuration</p>
   s2_loopback: 192.168.0.7
 </code></pre>
 
+<ul>
+<li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
+</ul>
 <h5 id="edit-playbook-for-leaf-role">Edit playbook for leaf role</h5>
-<p>use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/leaf/tasks/”</strong>.   On Atom, Make sure to click <strong>File-&gt;Save</strong> after entering the below data in this file so it is pushed to Ansible server:</p>
+<ul>
+<li>use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/leaf/tasks/”</strong>.   On Atom, Make sure to click <strong>File-&gt;Save</strong> after entering the below data in this file so it is pushed to Ansible server:</li>
+</ul>
 <hr />
 <p><font style=background-color:yellow>Note: It is recommended to write your playbook and learn from mistakes, but file is also available in the box folder if you prefer to reuse.</font> </p>
 <hr />
@@ -575,8 +589,13 @@ nxos_pim_interface  Manage PIM interface configuration</p>
          tags: multicast
 </code></pre>
 
+<ul>
+<li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
+</ul>
 <h5 id="edit-variable-file-for-leaf-role">Edit variable file for leaf role</h5>
-<p>Use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/leaf/vars/”</strong>.  On Atom, Make sure to click <strong>File-&gt;Save</strong> after entering the below data in this file so it is pushed to Ansible server:</p>
+<ul>
+<li>Use <strong>“Atom”</strong> to edit the main.yml file. Open up the project folder <strong>“LTRDCN-1572”</strong> and open main.yml file under <strong>“roles/leaf/vars/”</strong>.  On Atom, Make sure to click <strong>File-&gt;Save</strong> after entering the below data in this file so it is pushed to Ansible server:</li>
+</ul>
 <pre><code class="YAML">  rp_address: 192.168.0.100
   L3_interfaces:
   - { interface: Ethernet1/1 }
@@ -585,6 +604,9 @@ nxos_pim_interface  Manage PIM interface configuration</p>
   - { interface: loopback1 }
 </code></pre>
 
+<ul>
+<li><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </li>
+</ul>
 <h5 id="run-the-playbook-and-verify-configuration-changes">Run the playbook and verify configuration changes</h5>
 <p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook nxos_fabric.yml --tags "multicast"</code></p>
 <p>Below screenshots shows the output of above command:</p>
@@ -597,9 +619,7 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <p><img alt="" src="../pic/4-4-3.png" /></p>
 <hr />
 <h3 id="step-9-configure-vxlan-using-ansible">Step 9: Configure VXLAN using Ansible</h3>
-<ul>
-<li>In this section, we will be configuring VXLAN on leaf and spine switches. The NXOS modules we will be using in this section are </li>
-</ul>
+<p>In this section, we will be configuring VXLAN on leaf and spine switches. The NXOS modules we will be using in this section are </p>
 <table>
 <thead>
 <tr>
