@@ -86,9 +86,9 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#step-1-backup-running-configurations">Step 1:  backup running configurations</a></li>
+            <li><a class="toctree-l3" href="#step-1-backup-running-configurations">Step 1: Backup running configurations</a></li>
         
-            <li><a class="toctree-l3" href="#step-2-verify-underlay-and-overlay">Step 2:  Verify underlay and overlay</a></li>
+            <li><a class="toctree-l3" href="#step-2-verify-underlay-and-overlay">Step 2: Verify underlay and overlay</a></li>
         
             <li><a class="toctree-l3" href="#step-3-baseline-configuration-comparison">Step 3: Baseline configuration comparison</a></li>
         
@@ -157,10 +157,16 @@
 <li>Baseline configuration comparison </li>
 <li>Add new VNIs into the existing fabric</li>
 </ul>
-<h3 id="step-1-backup-running-configurations">Step 1:  backup running configurations</h3>
+<hr />
+<h3 id="step-1-backup-running-configurations">Step 1: Backup running configurations</h3>
+<p>In this section, you will use <strong>ios_config</strong> module to backup running configuration on each switch, the backup file will be saved to a local <strong>“backup”</strong> folder.  The backup argument create a full backup of the current running-config of each switch.  The backup file is written to the backup folder in the playbook root directory. If the directory does not exist, it is created.</p>
 <ul>
-<li>In this section, you will use <strong>ios_config</strong> module to backup running configuration on each switch, the backup file will be saved to a local <strong>“backup”</strong> folder.  The backup argument create a full backup of the current running-config of each switch.  The backup file is written to the backup folder in the playbook root directory. If the directory does not exist, it is created.
-On <strong>Atom</strong>, open up the project folder <strong>“LTRDCN-1572”</strong> and create new file under <strong>“LTRDCN-1572”</strong>. Name the new file <strong>“get_config.yml”</strong>.  After entering below data in the file, make sure to save this file by Clicking on “File” -&gt; “Save” to make sure the file is uploaded to Ansible server.</li>
+<li>
+<p>On <strong>Atom</strong>, open up the project folder <strong>“LTRDCN-1572”</strong> and create new file under <code>LTRDCN-1572</code>. Name the new file <code>get_config.yml</code>.</p>
+</li>
+<li>
+<p><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </p>
+</li>
 </ul>
 <pre><code class="YAML">---
    - hosts: spine,leaf,jinja2_leaf,jinja2_spine
@@ -180,19 +186,20 @@ On <strong>Atom</strong>, open up the project folder <strong>“LTRDCN-1572”</
 </code></pre>
 
 <ul>
-<li>Run <strong>“get_config.yml”</strong> playbook and verify the backup configurations in <strong>“backup”</strong> folder.</li>
-</ul>
-<pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook get_config.yml
+<li>
+<p>Run <strong>“get_config.yml”</strong> playbook and verify the backup configurations in <strong>“backup”</strong> folder by using below commands:</p>
+<p>~~~ 
+[root@rhel7-tools LTRDCN-1572]# ansible-playbook get_config.yml
 [root@rhel7-tools LTRDCN-1572]# ls -lrt
 [root@rhel7-tools LTRDCN-1572]# ls backup
-</code></pre>
-
+~~~</p>
 <p>You may further view the contents of the files under backup folder by using cat, less or more commands.  Below screenshot shows the output of above commands</p>
 <p><img alt="" src="../pic/5-1-1.png" /></p>
-<h3 id="step-2-verify-underlay-and-overlay">Step 2:  Verify underlay and overlay</h3>
-<ul>
-<li>In this section you will verify underlay and overlay operation using ansible playbook. The playbook will be applied to all leaf switches to verify </li>
+</li>
 </ul>
+<hr />
+<h3 id="step-2-verify-underlay-and-overlay">Step 2: Verify underlay and overlay</h3>
+<p>In this step, you will verify underlay and overlay operation using ansible playbook. The playbook will be applied to all leaf switches to verify the below commands:</p>
 <p><strong><em>Underlay</em></strong> </p>
 <pre><code>-   show ip ospf neighbor
 -   show ip bgp sum
@@ -206,7 +213,7 @@ On <strong>Atom</strong>, open up the project folder <strong>“LTRDCN-1572”</
 -   show l2route evpn mac-ip all
 </code></pre>
 <ul>
-<li>On Atom, Open up the project folder <strong>“LTRDCN-1572”</strong> and create new file under <strong>“LTRDCN-1572”</strong>. Name the new file <strong>“verify_fabric.yml”</strong></li>
+<li>Switch to “Atom”, <strong>right click</strong> on the folder <code>LTRDDCN-1572</code> and create a new playbook named <code>verify_fabric.yml</code>. Enter this file name and hit enter.</li>
 </ul>
 <pre><code class="YAML">---
   - hosts: leaf, jinja2_leaf
@@ -247,14 +254,24 @@ On <strong>Atom</strong>, open up the project folder <strong>“LTRDCN-1572”</
 </code></pre>
 
 <ul>
-<li>Run <strong>“verify_fabric.yml”</strong> playbook and verify the output for underlay </li>
+<li>
+<p><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </p>
+</li>
+<li>
+<p>On the Ansible node (via MTPutty), run <strong>verify_fabric.yml</strong> playbook and verify the output for <strong>underlay</strong> by executing below command (using respective tag): </p>
+</li>
 </ul>
+<p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags "underlay"</code></p>
 <hr />
 <p><font style=background-color:yellow>The output shows ospf, bgp and pim neighbors for all leaf switches</font></p>
 <hr />
-<p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags “underlay”</code></p>
+<ul>
+<li>
 <p>Below screenshot shows the partial output of above command:</p>
 <p><img alt="" src="../pic/5-2-1.png" /></p>
+</li>
+</ul>
+<p>Here is a log of execution of above command:</p>
 <pre><code> [root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags &quot;underlay&quot;
 
 PLAY [leaf, jinja2_leaf] ************************************************************************************************************************************************
@@ -369,18 +386,22 @@ PLAY RECAP *********************************************************************
 </code></pre>
 
 <ul>
-<li>Run <strong>“verify_fabric.yml”</strong> playbook and verify the output for overlay </li>
+<li>Run <strong>verify_fabric.yml</strong> playbook and verify the output for <strong>overlay</strong> using the respective tag in the command </li>
 </ul>
 <hr />
 <p><font style=background-color:yellow>The output shows nve tunnel peer, host route in bgp EVPN from all leaf switches</font></p>
 <hr />
-<pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags “overlay”
+<pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags &quot;overlay&quot;
 </code></pre>
 
+<ul>
+<li>
 <p>Below screenshot of the partial output of above command:</p>
 <p><img alt="" src="../pic/5-2-2.png" /></p>
-<ul>
-<li>Verify the output for <strong>vne vni</strong> status, <strong>vne</strong> dynamic neighbors, type host <strong>mac+ip evpn route update for each L2VNI, l2fib</strong> information.</li>
+</li>
+<li>
+<p>Below shows the complete log output of execution of above playbook command.   Verify the output for <strong>vne vni</strong> status, <strong>vne</strong> dynamic neighbors, type host <strong>mac+ip evpn route update for each L2VNI, l2fib</strong> information.</p>
+</li>
 </ul>
 <pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags &quot;overlay&quot;
 
@@ -501,7 +522,9 @@ ok: [198.18.4.101] =&gt; {
 <h3 id="step-3-baseline-configuration-comparison">Step 3: Baseline configuration comparison</h3>
 <p>In this section we will compare the running configuration with baseline configuration for configuration compliance check. The configuration file that we backed in tak 1 will be used as baseline configuration. </p>
 <p>In this playbook, you will use <strong>“lookup”</strong> module to find the backup filename generated in Step 1. Then you will use <strong>diff_against</strong> function in <strong>nxos_config</strong> module to compare running configuration. </p>
-<p>On Atom, Open up the project folder <strong>“LTRDCN-1572”</strong> and create new file under <strong>“LTRDCN-1572”</strong>. Name the new file <strong>“verify_config.yml”</strong></p>
+<ul>
+<li>On Atom, Open up the project folder <code>LTRDCN-1572</code> and create new file under <strong>“LTRDCN-1572”</strong>. Name the new file <code>verify_config.yml</code> and enter below data in this playbook:</li>
+</ul>
 <pre><code class="YAML">---
    - hosts: jinja2_leaf,leaf,jinja2_spine,spine
      connection: local
@@ -524,7 +547,14 @@ ok: [198.18.4.101] =&gt; {
            intended_config: &quot;{{ lookup('file', '{{filename}}') }}&quot;
 </code></pre>
 
-<p><strong>Before</strong> you run this playbook, SSH into leaf-4 to make some configuration change.</p>
+<ul>
+<li>
+<p><strong>Click</strong> <code>File</code> and <code>Save</code> . This will save the playbook, and also ftp the playbook to Ansible server using pre-configured “<strong>remote-sync</strong>” package. </p>
+</li>
+<li>
+<p><strong>Before</strong> you run this playbook, SSH into leaf-4 to make some configuration change as shown below.</p>
+</li>
+</ul>
 <pre><code>Leaf-4# conf t
 Enter configuration commands, one per line. End with CNTL/Z.
 Leaf-4(config)# no router bgp 65000
@@ -533,21 +563,31 @@ Leaf-4(config)# copy run start
 Leaf-4(config)# end
 </code></pre>
 
-<p>On the Ansible server, run the playbook for configuration compliance check </p>
-<hr />
-<p><font style=background-color:yellow>The delta between current running config and base line config are highlighted in <font style=color:limegreen>RED</font> from the result</font></p>
-<hr />
+<ul>
+<li>On the Ansible server (via MTputty SSH session), run the playbook for configuration compliance check by executing below command:</li>
+</ul>
 <pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook --diff verify_config.yml
 </code></pre>
 
+<hr />
+<p><font style=background-color:yellow>The delta between current running config and base line config are highlighted in <font style=color:limegreen>RED</font> from the result</font></p>
+<hr />
+<ul>
+<li>
 <p>Below partial screenshot shows the output of above command:</p>
 <p><img alt="" src="../pic/5-3-1.png" /></p>
-<p>Bring leaf-4 back to the baseline config</p>
+</li>
+<li>
+<p>Bring leaf-4 back to the baseline config by executing below command:</p>
 <pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook jinja2_fabric.yml --limit=198.18.4.104
 </code></pre>
-
+</li>
+<li>
 <p>Below screenshot shows the output of above command.  You can also log into leaf-4 and verify that bgp configurations are back:</p>
-<p><img alt="" src="../pic/5-3-2.png" /></p>
+<pre><code>![](pic/5-3-2.png)
+</code></pre>
+</li>
+</ul>
 <h3 id="step-4-add-new-vni">Step 4: Add new VNI</h3>
 <p>In this section, we will introduce following new VNI into the VXLAN fabric. </p>
 <table>
@@ -581,20 +621,25 @@ Leaf-4(config)# end
 </tbody>
 </table>
 <ul>
-<li>First we will creat a new role, and name it <strong>“vni_provision”</strong> under folder roles using <strong>ansible-galaxy</strong></li>
-</ul>
+<li>
+<p>First we will creat a new role, and name it <strong>“vni_provision”</strong> under folder roles using <strong>ansible-galaxy</strong> using below commands on the Ansible node (using MTputty via SSH connection): </p>
 <pre><code>[root@rhel7-tools LTRDCN-1572]# cd roles/
 [root@rhel7-tools roles]# ansible-galaxy init vni_provision
-- vni_provision was created successfully
 </code></pre>
-
-<ul>
-<li>Ansible-galaxy init will create new role with base role structure and empty main.yml file as role requires.   </li>
-<li>Switch to <strong>“Atom”</strong> and sync the new created folders between Ansible node and remote desktop. Right click on project folder <strong>“LTRDCN-1572”</strong>, open <strong>“Remote Sync”</strong> select <strong>“Download Folder”</strong></li>
-</ul>
+</li>
+<li>
+<p>Verify vni_provision was created successfully</p>
+</li>
+<li>
+<p>Ansible-galaxy init will create new role with base role structure and empty <strong>main.yml</strong> file as role requires.  </p>
+</li>
+<li>
+<p>Switch to <strong>“Atom”</strong> and sync the new created folders between Ansible node and remote desktop. Right click on project folder <strong>“LTRDCN-1572”</strong>, open <strong>“Remote Sync”</strong> select <strong>“Download Folder”</strong></p>
 <p><img alt="" src="../pic/5-4-1.png" /></p>
-<ul>
-<li>Edit variable file <strong>main.yml</strong> for <strong>“vni_provision”</strong> role under “/root/LTRDCN-1572/roles/vni_provision/vars”</li>
+</li>
+<li>
+<p>Edit variable file <strong>main.yml</strong> for <strong>“vni_provision”</strong> role under “/root/LTRDCN-1572/roles/vni_provision/vars”</p>
+</li>
 </ul>
 <pre><code class="YAML">---
 # vars file for vni_provision
@@ -610,14 +655,14 @@ Leaf-4(config)# end
   - { vlan_id: 201, vni: 50201, ip_add: 172.21.201.1, mask: 24, vlan_name: L2-VNI-201-Tenant1, mcast: 239.0.0.201 }
 </code></pre>
 
-<p><img alt="" src="../pic/5-4-2.png" /></p>
+<pre><code>![](pic/5-4-2.png)
+</code></pre>
 <ul>
-<li>Edit playbook file <strong>‘mail.yml’</strong> for <strong>“vni_provision”</strong> role under <strong>“/root/LTRDCN-1572/roles/vni_provision/tasks”</strong></li>
+<li>Edit playbook file <strong>‘mail.yml’</strong> for <strong>“vni_provision”</strong> role under <strong>“/root/LTRDCN-1572/roles/vni_provision/tasks”</strong> and enter below data:</li>
 </ul>
 <hr />
 <p><font style=background-color:yellow>Note: It is recommended to write your playbook and learn from mistakes, but file is also available in the box folder if you prefer to reuse.</font> </p>
 <hr />
-<p><img alt="" src="../pic/5-4-3.png" /></p>
 <pre><code class="YAML">---
 # tasks file for vni_provision
        - name: Configure VLAN to VNI
@@ -669,6 +714,10 @@ Leaf-4(config)# end
          with_items: &quot;{{ L2VNI }}&quot;
 </code></pre>
 
+<pre><code>this is shown in below screenshot:
+
+![](pic/5-4-3.png)
+</code></pre>
 <ul>
 <li>Switch to “Atom”  create new playbook <strong>‘vni_provision.yml’</strong> under project folder <strong>LTRDCN-1572</strong>. </li>
 </ul>
@@ -688,7 +737,7 @@ Leaf-4(config)# end
 <p><img alt="" src="../pic/5-4-4.png" /></p>
 <ul>
 <li>
-<p>Switch to <strong>MTPutty</strong> connect to <strong>leaf-4</strong>, verify the change on leaf switches using command <strong>show nve vni</strong>. Notice the new created L2VNI. </p>
+<p>Switch to <strong>MTPutty</strong> and connect to <strong>leaf-4</strong> (SSH connection0, verify the change on leaf switches using command <strong>show nve vni</strong>. Notice the new created L2VNI. </p>
 <p><img alt="" src="../pic/5-4-5.png" /></p>
 </li>
 </ul>
