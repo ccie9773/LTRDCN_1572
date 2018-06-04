@@ -960,16 +960,19 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <ul>
 <li>
 <p>On the Ansible server (using MTPutty) run this playbook by running the below command:</p>
-<p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook nxos_fabric.yml --tags “evpn”</code></p>
+<p><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook nxos_fabric.yml --tags "evpn"</code></p>
 <p>Below screenshot shows the output of above playbook:</p>
 <p><img alt="" src="../pic/4-6-1.png" /></p>
 </li>
 <li>
-<p>After successful execution of the playbook: login to any leaf or spine switch to verify BGP EVPN configuration and evpn negibor from <code>show bgp l2vpn evpn summary</code></p>
-<p>Below screenshot shows the output of above command from leaf-4 switch:</p>
-<p><img alt="" src="../pic/4-6-2.png" /></p>
+<p>After successful execution of the playbook: <strong>login</strong> to <strong>any leaf or spine</strong> switch to verify BGP EVPN configuration and evpn negibor by using command: </p>
 </li>
 </ul>
+<p><code>show bgp l2vpn evpn summary</code></p>
+<pre><code>Below screenshot shows the output of above command from leaf-4 switch.  As expected it shows the spine-1 and spine-2 as neighbors:
+
+![](pic/4-6-2.png)
+</code></pre>
 <hr />
 <h3 id="step-11-run-nxos_fabric-playbook">Step 11: Run nxos_fabric playbook</h3>
 <ul>
@@ -979,8 +982,9 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 </li>
 </ul>
 <hr />
+<p><strong>Congratulation!</strong> You have just built VXLAN fabric using ansible + Jinja2 template and ansible + NXOS modules. </p>
 <ul>
-<li><strong>Congratulation!</strong> You have just built VXLAN fabric using ansible + Jinja2 template and ansible + NXOS modules. Let’s verify the VXLAN bridging and VXLAN routing from servers that are pre-configured in following VLANs and IPs </li>
+<li>Let’s verify the VXLAN bridging and VXLAN routing from servers that are pre-configured in following VLANs and IPs </li>
 </ul>
 <table>
 <thead>
@@ -988,7 +992,7 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 <th>Server Name</th>
 <th>Connect to switch</th>
 <th>In VLAN</th>
-<th>IP</th>
+<th>IP of server</th>
 </tr>
 </thead>
 <tbody>
@@ -1013,8 +1017,12 @@ nxos_pim_interface  Manage PIM interface configuration</p>
 </tbody>
 </table>
 <ul>
-<li>Switch to MTPuTTY and connect to server-1 with root/C1sco12345</li>
-<li>Ping default gateway from server-1 </li>
+<li>
+<p>Switch to MTPuTTY and connect to server-1 with root/C1sco12345</p>
+</li>
+<li>
+<p>Ping default gateway from server-1 </p>
+</li>
 </ul>
 <pre><code>[root@server-1 ~]# ping 172.21.140.1
 PING 172.21.140.1 (172.21.140.1) 56(84) bytes of data.
@@ -1023,7 +1031,7 @@ PING 172.21.140.1 (172.21.140.1) 56(84) bytes of data.
 </code></pre>
 
 <ul>
-<li>Ping server 3 and server 4</li>
+<li>Ping server 3 and server 4 from server-1 (in same VLAN and inter-VLAN respectively):</li>
 </ul>
 <pre><code>[[root@server-1 ~]# ping 172.21.140.11
 PING 172.21.140.11 (172.21.140.11) 56(84) bytes of data.
