@@ -169,30 +169,30 @@
 </li>
 </ul>
 <pre><code class="YAML">---
-   - hosts: spine,leaf,jinja2_leaf,jinja2_spine
-     connection: local
-     vars:
-       nxos_provider:
-          transport: nxapi
-          username: &quot;{{ user }}&quot;
-          password: &quot;{{ pwd }}&quot;
-          host: &quot;{{ inventory_hostname }}&quot;
-     tasks:
+  - hosts: spine,leaf,jinja2_leaf,jinja2_spine
+    connection: local
+    vars:
+      ios_provider:
+        transport: nxapi
+        username: &quot;{{ user }}&quot;
+        password: &quot;{{ pwd }}&quot;
+        host: &quot;{{ inventory_hostname }}&quot;
+    tasks:
       - name: save running
         nxos_config:
-          provider: &quot;{{ ios_provider }}&quot;
-          backup: yes
-          timeout: 20
+           provider: &quot;{{ ios_provider }}&quot;
+           backup: yes
+           timeout: 20
+
 </code></pre>
 
 <ul>
 <li>
-<p>Run <strong>“get_config.yml”</strong> playbook and verify the backup configurations in <strong>“backup”</strong> folder by using below commands:</p>
-<p>~~~ 
-[root@rhel7-tools LTRDCN-1572]# ansible-playbook get_config.yml
+<p>On the Ansible node (using MTputty via SSH), run <strong>“get_config.yml”</strong> playbook and verify the backup configurations in <strong>“backup”</strong> folder by using below commands:</p>
+<pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook get_config.yml
 [root@rhel7-tools LTRDCN-1572]# ls -lrt
 [root@rhel7-tools LTRDCN-1572]# ls backup
-~~~</p>
+</code></pre>
 <p>You may further view the contents of the files under backup folder by using cat, less or more commands.  Below screenshot shows the output of above commands</p>
 <p><img alt="" src="../pic/5-1-1.png" /></p>
 </li>
@@ -385,15 +385,16 @@ PLAY RECAP *********************************************************************
 198.18.4.104               : ok=2    changed=0    unreachable=0    failed=0
 </code></pre>
 
+<p>Next:</p>
 <ul>
-<li>Run <strong>verify_fabric.yml</strong> playbook and verify the output for <strong>overlay</strong> using the respective tag in the command </li>
+<li>Run <strong>verify_fabric.yml</strong> playbook and verify the output for <strong>overlay</strong> using the respective tag in the command (as shown below):</li>
 </ul>
-<hr />
-<p><font style=background-color:yellow>The output shows nve tunnel peer, host route in bgp EVPN from all leaf switches</font></p>
-<hr />
 <pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook verify_fabric.yml --tags &quot;overlay&quot;
 </code></pre>
 
+<hr />
+<p><font style=background-color:yellow>The output shows nve tunnel peer, host route in bgp EVPN from all leaf switches</font></p>
+<hr />
 <ul>
 <li>
 <p>Below screenshot of the partial output of above command:</p>
@@ -519,6 +520,7 @@ ok: [198.18.4.101] =&gt; {
 }
 </code></pre>
 
+<hr />
 <h3 id="step-3-baseline-configuration-comparison">Step 3: Baseline configuration comparison</h3>
 <p>In this section we will compare the running configuration with baseline configuration for configuration compliance check. The configuration file that we backed in tak 1 will be used as baseline configuration. </p>
 <p>In this playbook, you will use <strong>“lookup”</strong> module to find the backup filename generated in Step 1. Then you will use <strong>diff_against</strong> function in <strong>nxos_config</strong> module to compare running configuration. </p>
@@ -584,10 +586,10 @@ Leaf-4(config)# end
 </li>
 <li>
 <p>Below screenshot shows the output of above command.  You can also log into leaf-4 and verify that bgp configurations are back:</p>
-<pre><code>![](pic/5-3-2.png)
-</code></pre>
+<p><img alt="" src="../pic/5-3-2.png" /></p>
 </li>
 </ul>
+<hr />
 <h3 id="step-4-add-new-vni">Step 4: Add new VNI</h3>
 <p>In this section, we will introduce following new VNI into the VXLAN fabric. </p>
 <table>
@@ -638,7 +640,7 @@ Leaf-4(config)# end
 <p><img alt="" src="../pic/5-4-1.png" /></p>
 </li>
 <li>
-<p>Edit variable file <strong>main.yml</strong> for <strong>“vni_provision”</strong> role under “/root/LTRDCN-1572/roles/vni_provision/vars”</p>
+<p>Edit variable file <strong>main.yml</strong> for <strong>“vni_provision”</strong> role under “/root/LTRDCN-1572/roles/vni_provision/vars” and enter below data.  Make sure to click <code>File</code> and <code>Save</code> on Atom to push this to Ansible server:</p>
 </li>
 </ul>
 <pre><code class="YAML">---
@@ -655,10 +657,9 @@ Leaf-4(config)# end
   - { vlan_id: 201, vni: 50201, ip_add: 172.21.201.1, mask: 24, vlan_name: L2-VNI-201-Tenant1, mcast: 239.0.0.201 }
 </code></pre>
 
-<pre><code>![](pic/5-4-2.png)
-</code></pre>
+<p><img alt="" src="../pic/5-4-2.png" /></p>
 <ul>
-<li>Edit playbook file <strong>‘mail.yml’</strong> for <strong>“vni_provision”</strong> role under <strong>“/root/LTRDCN-1572/roles/vni_provision/tasks”</strong> and enter below data:</li>
+<li>Edit playbook file <code>mail.yml</code> for <strong>“vni_provision”</strong> role under <strong>“/root/LTRDCN-1572/roles/vni_provision/tasks”</strong> and enter below data.   Make sure to click <code>File</code> and <code>Save</code> on Atom to push this to Ansible server:</li>
 </ul>
 <hr />
 <p><font style=background-color:yellow>Note: It is recommended to write your playbook and learn from mistakes, but file is also available in the box folder if you prefer to reuse.</font> </p>
@@ -714,12 +715,10 @@ Leaf-4(config)# end
          with_items: &quot;{{ L2VNI }}&quot;
 </code></pre>
 
-<pre><code>this is shown in below screenshot:
-
-![](pic/5-4-3.png)
-</code></pre>
+<p>this is shown in below screenshot:</p>
+<p><img alt="" src="../pic/5-4-3.png" /></p>
 <ul>
-<li>Switch to “Atom”  create new playbook <strong>‘vni_provision.yml’</strong> under project folder <strong>LTRDCN-1572</strong>. </li>
+<li>Switch to “Atom”  create new playbook <strong>‘vni_provision.yml’</strong> under project folder <strong>LTRDCN-1572</strong> and enter below data.  Make sure to click <code>File</code> and <code>Save</code> on Atom to push this to Ansible server:</li>
 </ul>
 <pre><code class="YAML">---
 - hosts: leaf,jinja2_leaf
@@ -729,13 +728,13 @@ Leaf-4(config)# end
 </code></pre>
 
 <ul>
-<li>Run playbook <strong>vni_provision.yml</strong> to add new VNIs on the fabric</li>
-</ul>
+<li>
+<p>Run playbook <strong>vni_provision.yml</strong> to add new VNIs on the fabric</p>
 <pre><code>[root@rhel7-tools LTRDCN-1572]# ansible-playbook vni_provision.yml
 </code></pre>
-
+<p>Below screenshot shows the output of above command:</p>
 <p><img alt="" src="../pic/5-4-4.png" /></p>
-<ul>
+</li>
 <li>
 <p>Switch to <strong>MTPutty</strong> and connect to <strong>leaf-4</strong> (SSH connection0, verify the change on leaf switches using command <strong>show nve vni</strong>. Notice the new created L2VNI. </p>
 <p><img alt="" src="../pic/5-4-5.png" /></p>
