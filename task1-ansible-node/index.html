@@ -259,13 +259,9 @@ ansible 2.5.0
 <li>Create Ansible inventory file to include Spine and Leaf switches. </li>
 <li>By default Ansible has inventory file saved in location /etc/ansible/hosts. </li>
 <li>
-<p>In this lab we will create hosts file in the working environment. Use ‘vi’ to create inventory file ‘hosts’ as shown below:</p>
-<pre><code>[root@rhel7-tools LTRDCN-1572]# vi hosts
-</code></pre>
-</li>
-<li>
-<p>At the bottom of the inventory file, insert (type <code>i</code>) the following lines:</p>
-<pre><code>#define global variables, groups and host variables
+<p>In this lab we will create hosts file in the working environment.  You can use the below text to create this file:</p>
+<pre><code>cat &gt; hosts &lt;&lt; _EOF
+#define global variables, groups and host variables
 [all:vars]
 ansible_connection = local
 user=admin
@@ -286,34 +282,31 @@ gather_fact=no
 198.18.134.53 eth1=172.21.141.11 gw=172.21.141.1
 [f5]
 198.18.4.10
+
+_EOF
 </code></pre>
-</li>
-<li>
-<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code>  </p>
 <p>Below screenshot shows the execution of above command:
-<img alt="" src="../pic/1-9-2-inv.png" /></p>
+<img alt="" src="../pic/1-9-2.png" /></p>
 </li>
 <li>
-<p>Create Ansible config (ansible.cfg) file via vi editor pointing to local ‘hosts’ file for inventory. Use <code>vi ansible.cfg</code> to create this file as shown below:</p>
-<pre><code>[root@rhel7-tools LTRDCN-1572]# vi ansible.cfg
-</code></pre>
+<p>Create Ansible config (ansible.cfg) file pointing to local ‘hosts’ file for inventory. Use the below text to create ansible.cfg file:</p>
 </li>
-<li>
-<p>At the bottom of the ansible.cfg file, insert the below lines (by typing <code>i</code>):</p>
-<pre><code>[defaults]
+</ul>
+<pre><code>cat &gt; ansible.cfg &lt;&lt; _EOF
+[defaults]
 inventory = hosts
 host_key_checking = false
 record_host_key = true
 stdout_callback = debug
+
+_EOF
 </code></pre>
-</li>
+
+<ul>
 <li>
-<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code>  </p>
-</li>
-<li>
-<p>Do <code>ls</code> to verify the file that you just created under project folder LTRDCN-1572.   </p>
+<p>Do <code>ls</code> to verify the file that you just created under project folder LTRDCN-1572.  You may also use <code>more</code> or <code>less</code> to view the contents of these files.  </p>
 <p>Below screenshot shows the execution of above command:
-<img alt="" src="../pic/1-9-3-ls.png" /></p>
+<img alt="" src="../pic/1-9-3.png" /></p>
 </li>
 <li>
 <p>Create host variable folder named host_vars in folder LTRDCN-1572. Host varilables can be placed in different places in Ansible. In this lab, we will use host_vars for host variables:</p>
@@ -321,93 +314,76 @@ stdout_callback = debug
 </code></pre>
 </li>
 <li>
-<p>Create host variable file for each host in inventory. Use <code>vi</code> to create following file: </p>
-<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.101.yml
-</code></pre>
-<p>In the file: add below data (by typing <code>i</code>):</p>
+<p>Create host variable file for each host in inventory.  Copy and paste the below text to create file for leaf-1 variables: </p>
 </li>
 </ul>
-<pre><code class="YAML">---
+<pre><code class="YAML">cat &gt; 198.18.4.101.yml &lt;&lt; _EOF
+---
   hostname: leaf_1
   loopback0: 192.168.0.8
   loopback1: 192.168.0.18
   router_id: 192.168.0.8
+
+_EOF
 </code></pre>
 
 <ul>
-<li>
-<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
-</li>
-<li>
-<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
-<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.103.yml
-</code></pre>
-<p>In the file: add below data (by typing <code>i</code>):</p>
-</li>
+<li>Create a new host variable file for next host (i.e., leaf-3) in inventory directory:</li>
 </ul>
-<pre><code class="YAML">---
+<pre><code class="YAML">cat &gt; 198.18.4.103.yml &lt;&lt; _EOF
+---
   hostname: leaf_3
   loopback0: 192.168.0.10
   loopback1: 192.168.0.110
   router_id: 192.168.0.10
+
+_EOF
 </code></pre>
 
 <ul>
-<li>
-<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
-</li>
-<li>
-<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
-<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.104.yml
-</code></pre>
-<p>In the file: add below data (by typing <code>i</code>):</p>
-</li>
+<li>Create a new host variable file for next host (i.e., leaf-4) in inventory directory:</li>
 </ul>
-<pre><code class="YAML">---
+<pre><code class="YAML">cat &gt; 198.18.4.104.yml &lt;&lt; _EOF
+---
   hostname: leaf_4
   loopback0: 192.168.0.11
   loopback1: 192.168.0.111
   router_id: 192.168.0.11
+
+_EOF
 </code></pre>
 
 <ul>
-<li>
-<p>Quit and save vi editor by pressing <code>Esc</code> key and then type <code>:wq!</code>   </p>
-</li>
-<li>
-<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
-<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.201.yml
-</code></pre>
-<p>In the file: add below data (by typing <code>i</code>):</p>
-</li>
+<li>Create a new host variable file for next host (i.e., spine-1) in inventory directory:</li>
 </ul>
-<pre><code class="YAML">---
+<pre><code class="YAML">cat &gt; 198.18.4.201.yml &lt;&lt; _EOF
+---
   hostname: spine-1
   loopback0: 192.168.0.6
   loopback1: 192.168.0.100
   router_id: 192.168.0.6
+
+_EOF
 </code></pre>
 
 <ul>
-<li>
-<p>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </p>
-</li>
-<li>
-<p>Create a new host variable file for next host in inventory. Use <code>vi</code> to create following file: </p>
-<pre><code>[root@rhel7-tools host_vars]# vi 198.18.4.202.yml
-</code></pre>
-<p>In the file: add below data (by typing <code>i</code>):</p>
-</li>
+<li>Create a new host variable file for next host (i.e., spine-2) in inventory directory:</li>
 </ul>
-<pre><code class="YAML">---
+<pre><code class="YAML">cat &gt; 198.18.4.202.yml &lt;&lt; _EOF
+---
   hostname: spine-2
   loopback0: 192.168.0.7 
   loopback1: 192.168.0.100
   router_id: 192.168.0.7
+
+_EOF
 </code></pre>
 
 <ul>
-<li>Quit and save vi editor by press <code>Esc</code> key and then type <code>:wq!</code> </li>
+<li>
+<p>Do <code>ls</code> to verify that all the files are created properly as shown in below screenshot.  You may further verify the content of the files by using <code>less</code> or <code>more</code> commands.</p>
+<p><img alt="" src="../pic/1-9-4.png" /></p>
+</li>
 </ul>
 <h4 id="step-10-ansible-role-structure">Step 10: Ansible role structure</h4>
 <p>Role is very useful technique to manage a set of playbooks in Ansible. 
